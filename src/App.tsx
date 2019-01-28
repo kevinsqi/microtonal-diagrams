@@ -3,11 +3,16 @@ import { saveAs } from "file-saver";
 import range from "lodash.range";
 import "./App.css";
 
-function TuningDiagram(props: { count: number }) {
-  const radius = 5;
+function TuningDiagram(props: {
+  count: number;
+  color: string;
+  radius: number;
+  separation: number;
+}) {
+  const { color, radius, separation } = props;
   const diameter = radius * 2;
   const height = diameter;
-  const width = props.count * diameter;
+  const width = props.count * (diameter + separation) - separation;
   return (
     <div>
       <svg
@@ -16,17 +21,27 @@ function TuningDiagram(props: { count: number }) {
         xmlns="http://www.w3.org/2000/svg"
       >
         {range(props.count).map(idx => {
-          return <circle cx={diameter * idx + radius} cy={radius} r={radius} />;
+          return (
+            <circle
+              cx={(diameter + separation) * idx + radius}
+              cy={radius}
+              r={radius}
+              style={{ fill: color }}
+            />
+          );
         })}
         {range(props.count - 1).map(idx => {
-          const x1 = radius * 2 * idx + radius;
+          const x1 = (diameter + separation) * idx + radius;
           return (
             <line
               x1={x1}
               y1={radius}
-              x2={x1 + diameter}
+              x2={x1 + diameter + separation}
               y2={radius}
-              stroke="white"
+              style={{
+                stroke: color,
+                strokeWidth: 1
+              }}
             />
           );
         })}
@@ -51,7 +66,8 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Microtonal Diagrams</h1>
-        <TuningDiagram count={12} />
+        <TuningDiagram count={12} color="blue" radius={5} separation={10} />
+        <TuningDiagram count={24} color="blue" radius={5} separation={10} />
       </div>
     );
   }
