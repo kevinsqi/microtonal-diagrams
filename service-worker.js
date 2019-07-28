@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/microtonal-diagrams/precache-manifest.d3ed11bd78c598ec46e8766213309c4b.js"
+  "/microtonal-diagrams/precache-manifest.2c538730806566282e1a5977a55e568d.js"
 );
 
 self.addEventListener('message', (event) => {
