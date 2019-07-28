@@ -14,11 +14,12 @@ const Diagram = React.forwardRef((
     separation,
     circleColor,
     lineColor,
+    textBelowCircle,
     textColor,
-    text
+    textInCircle
   } = diagramConfig;
   const diameter = radius * 2;
-  const height = diameter;
+  const height = textBelowCircle ? diameter * 2 : diameter;
   const width = count * (diameter + separation) - separation;
   return (
     <svg
@@ -48,7 +49,7 @@ const Diagram = React.forwardRef((
         return (
           <React.Fragment key={idx}>
             <circle cx={cx} cy={cy} r={radius} style={{ fill: circleColor }} />
-            {text[idx] && (
+            {textInCircle[idx] && (
               <text
                 x={cx}
                 y={cy}
@@ -59,7 +60,20 @@ const Diagram = React.forwardRef((
                   fill: textColor
                 }}
               >
-                {text[idx]}
+                {textInCircle[idx]}
+              </text>
+            )}
+            {textBelowCircle[idx] && (
+              <text
+                x={cx}
+                y={diameter * 1.6}
+                style={{
+                  fontSize: 5,
+                  fill: textColor,
+                  textAnchor: "middle"
+                }}
+              >
+                {textBelowCircle[idx]}
               </text>
             )}
           </React.Fragment>

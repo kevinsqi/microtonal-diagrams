@@ -6,7 +6,6 @@ import "./App.css";
 import Diagram from "./Diagram";
 import { DiagramConfig } from "./types";
 
-// TODO: be able to specify text for each dot (put input above them?)
 // TODO: specify width/height
 // TODO: rename project to be more general, not specific to microtones
 
@@ -58,20 +57,22 @@ function ConfigForm({
     <form>
       <div className="row">
         <div className="col-12 col-md-3">
-          <label>Circle count</label>
-          <input
-            className="form-control"
-            type="number"
-            value={diagramConfig.count}
-            min={1}
-            max={1000}
-            onChange={event => {
-              setDiagramConfig({
-                ...diagramConfig,
-                count: parseInt(event.target.value)
-              });
-            }}
-          />
+          <div>
+            <label>Circle count</label>
+            <input
+              className="form-control"
+              type="number"
+              value={diagramConfig.count}
+              min={1}
+              max={1000}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  count: parseInt(event.target.value)
+                });
+              }}
+            />
+          </div>
           <div className="mt-3">
             <label>Circle radius</label>
             <input
@@ -90,21 +91,40 @@ function ConfigForm({
           </div>
         </div>
         <div className="col-12 col-md-3">
-          <label>Text</label>
-          <input
-            className="form-control"
-            type="text"
-            value={diagramConfig.text.join(" ")}
-            min={1}
-            max={1000}
-            onChange={event => {
-              setDiagramConfig({
-                ...diagramConfig,
-                text: event.target.value.split(" ")
-              });
-            }}
-          />
-          <small className="text-secondary">Separate with spaces</small>
+          <div>
+            <label>Text in circle</label>
+            <input
+              className="form-control"
+              type="text"
+              value={diagramConfig.textInCircle.join(" ")}
+              min={1}
+              max={1000}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  textInCircle: event.target.value.split(" ")
+                });
+              }}
+            />
+            <small className="text-secondary">Separate with spaces</small>
+          </div>
+          <div className="mt-3">
+            <label>Text below circle</label>
+            <input
+              className="form-control"
+              type="text"
+              value={diagramConfig.textBelowCircle.join(" ")}
+              min={1}
+              max={1000}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  textBelowCircle: event.target.value.split(" ")
+                });
+              }}
+            />
+            <small className="text-secondary">Separate with spaces</small>
+          </div>
         </div>
         <div className="col-12 col-md-3">
           <label>Line length</label>
@@ -123,42 +143,48 @@ function ConfigForm({
           />
         </div>
         <div className="col-12 col-md-3">
-          <label>Circle color</label>
-          <input
-            className="form-control"
-            type="text"
-            value={diagramConfig.circleColor}
-            onChange={event => {
-              setDiagramConfig({
-                ...diagramConfig,
-                circleColor: event.target.value
-              });
-            }}
-          />
-          <label>Line color</label>
-          <input
-            className="form-control"
-            type="text"
-            value={diagramConfig.lineColor}
-            onChange={event => {
-              setDiagramConfig({
-                ...diagramConfig,
-                lineColor: event.target.value
-              });
-            }}
-          />
-          <label>Text color</label>
-          <input
-            className="form-control"
-            type="text"
-            value={diagramConfig.textColor}
-            onChange={event => {
-              setDiagramConfig({
-                ...diagramConfig,
-                textColor: event.target.value
-              });
-            }}
-          />
+          <div>
+            <label>Circle color</label>
+            <input
+              className="form-control"
+              type="text"
+              value={diagramConfig.circleColor}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  circleColor: event.target.value
+                });
+              }}
+            />
+          </div>
+          <div className="mt-3">
+            <label>Line color</label>
+            <input
+              className="form-control"
+              type="text"
+              value={diagramConfig.lineColor}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  lineColor: event.target.value
+                });
+              }}
+            />
+          </div>
+          <div className="mt-3">
+            <label>Text color</label>
+            <input
+              className="form-control"
+              type="text"
+              value={diagramConfig.textColor}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  textColor: event.target.value
+                });
+              }}
+            />
+          </div>
         </div>
       </div>
     </form>
@@ -172,8 +198,9 @@ export default function App() {
     lineColor: "#fff",
     radius: 5,
     separation: 20,
-    text: [],
-    textColor: "#222"
+    textBelowCircle: [],
+    textColor: "#222",
+    textInCircle: []
   });
 
   return (

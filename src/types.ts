@@ -4,6 +4,7 @@ export type DiagramConfig = {
   lineColor: string;
   radius: number;
   separation: number;
-  text: string[];
+  textBelowCircle: string[];
+  textInCircle: string[];
   textColor: string;
 };
