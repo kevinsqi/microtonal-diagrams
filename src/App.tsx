@@ -18,8 +18,62 @@ export default function App() {
     <div className="container my-5">
       <h1 className="text-center">Microtone Scale Diagrams</h1>
       <div className="mt-5">
+        <form>
+          <label>Count</label>
+          <input
+            className="form-control"
+            type="number"
+            value={scaleConfig.count}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setScaleConfig({
+                ...scaleConfig,
+                count: parseInt(event.target.value)
+              });
+            }}
+          />
+          <label>Radius</label>
+          <input
+            className="form-control"
+            type="number"
+            value={scaleConfig.radius}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setScaleConfig({
+                ...scaleConfig,
+                radius: parseInt(event.target.value)
+              });
+            }}
+          />
+          <label>Separation</label>
+          <input
+            className="form-control"
+            type="number"
+            value={scaleConfig.separation}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setScaleConfig({
+                ...scaleConfig,
+                separation: parseInt(event.target.value)
+              });
+            }}
+          />
+          <label>Color</label>
+          <input
+            className="form-control"
+            type="text"
+            value={scaleConfig.color}
+            onChange={event => {
+              setScaleConfig({ ...scaleConfig, color: event.target.value });
+            }}
+          />
+        </form>
+      </div>
+      <div className="mt-5">
         <ScaleDiagram {...scaleConfig} />
-        <ScaleDiagram count={24} color="black" radius={5} separation={10} />
       </div>
     </div>
   );
