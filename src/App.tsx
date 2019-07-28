@@ -1,9 +1,43 @@
 import React from "react";
 import "./App.css";
 import ScaleDiagram from "./ScaleDiagram";
+import { saveAs } from "file-saver";
+import { saveSvgAsPng } from "save-svg-as-png";
 
 // TODO: rename project to be more general, not specific to microtones
-// TODO: move buttons out of ScaleDiagram
+
+class DiagramContainer extends React.Component<any> {
+  svgRef = React.createRef();
+
+  render() {
+    return (
+      <div>
+        <ScaleDiagram {...this.props.scaleConfig} ref={this.svgRef} />
+        <button
+          className="btn btn-secondary"
+          onClick={() => {
+            const svgElement: HTMLElement = this.svgRef.current as HTMLElement;
+            const svgBlob = new Blob([svgElement.outerHTML], {
+              type: "image/svg+xml"
+            });
+            saveAs(svgBlob, "diagram.svg");
+          }}
+        >
+          Download .svg
+        </button>
+        <button
+          className="btn btn-secondary"
+          onClick={() => {
+            const svgElement: HTMLElement = this.svgRef.current as HTMLElement;
+            saveSvgAsPng(svgElement, "diagram.png", { scale: 4 });
+          }}
+        >
+          Download .png
+        </button>
+      </div>
+    );
+  }
+}
 
 export default function App() {
   // TODO: be able to specify text for each dot (put input above them?)
@@ -83,7 +117,7 @@ export default function App() {
         </form>
       </div>
       <div className="mt-5">
-        <ScaleDiagram {...scaleConfig} />
+        <DiagramContainer scaleConfig={scaleConfig} />
       </div>
     </div>
   );
