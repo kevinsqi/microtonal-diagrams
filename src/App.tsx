@@ -198,9 +198,9 @@ export default function App() {
     lineColor: "#fff",
     radius: 5,
     separation: 20,
-    textBelowCircle: [],
+    textBelowCircle: ["A", "B", "C"],
     textColor: "#222",
-    textInCircle: []
+    textInCircle: ["1", "2", "3"]
   });
 
   return (
