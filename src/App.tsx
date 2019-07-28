@@ -123,13 +123,40 @@ function ConfigForm({
           />
         </div>
         <div className="col-12 col-md-3">
-          <label>Color</label>
+          <label>Circle color</label>
           <input
             className="form-control"
             type="text"
-            value={diagramConfig.color}
+            value={diagramConfig.circleColor}
             onChange={event => {
-              setDiagramConfig({ ...diagramConfig, color: event.target.value });
+              setDiagramConfig({
+                ...diagramConfig,
+                circleColor: event.target.value
+              });
+            }}
+          />
+          <label>Line color</label>
+          <input
+            className="form-control"
+            type="text"
+            value={diagramConfig.lineColor}
+            onChange={event => {
+              setDiagramConfig({
+                ...diagramConfig,
+                lineColor: event.target.value
+              });
+            }}
+          />
+          <label>Text color</label>
+          <input
+            className="form-control"
+            type="text"
+            value={diagramConfig.textColor}
+            onChange={event => {
+              setDiagramConfig({
+                ...diagramConfig,
+                textColor: event.target.value
+              });
             }}
           />
         </div>
@@ -141,10 +168,12 @@ function ConfigForm({
 export default function App() {
   const [diagramConfig, setDiagramConfig] = React.useState<DiagramConfig>({
     count: 12,
-    color: "white",
+    circleColor: "#fff",
+    lineColor: "#fff",
     radius: 5,
     separation: 20,
-    text: []
+    text: [],
+    textColor: "#222"
   });
 
   return (

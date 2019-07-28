@@ -8,7 +8,15 @@ const Diagram = React.forwardRef((
   // TODO: type better
   ref: any
 ) => {
-  const { radius, count, separation, color, text } = diagramConfig;
+  const {
+    radius,
+    count,
+    separation,
+    circleColor,
+    lineColor,
+    textColor,
+    text
+  } = diagramConfig;
   const diameter = radius * 2;
   const height = diameter;
   const width = count * (diameter + separation) - separation;
@@ -27,7 +35,7 @@ const Diagram = React.forwardRef((
             x2={x1 + diameter + separation}
             y2={radius}
             style={{
-              stroke: color,
+              stroke: lineColor,
               strokeWidth: 1
             }}
             key={idx}
@@ -39,7 +47,7 @@ const Diagram = React.forwardRef((
         const cy = radius;
         return (
           <React.Fragment key={idx}>
-            <circle cx={cx} cy={cy} r={radius} style={{ fill: color }} />
+            <circle cx={cx} cy={cy} r={radius} style={{ fill: circleColor }} />
             {text[idx] && (
               <text
                 x={cx}
@@ -47,7 +55,8 @@ const Diagram = React.forwardRef((
                 style={{
                   fontSize: 5,
                   dominantBaseline: "central",
-                  textAnchor: "middle"
+                  textAnchor: "middle",
+                  fill: textColor
                 }}
               >
                 {text[idx]}

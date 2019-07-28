@@ -1,7 +1,9 @@
 export type DiagramConfig = {
   count: number;
-  color: string;
+  circleColor: string;
+  lineColor: string;
   radius: number;
   separation: number;
   text: string[];
+  textColor: string;
 };
