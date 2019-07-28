@@ -1,7 +1,7 @@
 import React from "react";
 import range from "lodash.range";
 
-const ScaleDiagram = React.forwardRef((
+const Diagram = React.forwardRef((
   {
     count,
     color,
@@ -56,4 +56,4 @@ const ScaleDiagram = React.forwardRef((
   );
 });
 
-export default ScaleDiagram;
+export default Diagram;

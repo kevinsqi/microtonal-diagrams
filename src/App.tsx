@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ScaleDiagram from "./ScaleDiagram";
+import Diagram from "./Diagram";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng } from "save-svg-as-png";
 
@@ -21,7 +21,7 @@ class DiagramContainer extends React.Component<any> {
   render() {
     return (
       <div>
-        <ScaleDiagram {...this.props.diagramConfig} ref={this.svgRef} />
+        <Diagram {...this.props.diagramConfig} ref={this.svgRef} />
         <div className="text-center mt-5">
           <button
             className="btn btn-lg btn-secondary"
