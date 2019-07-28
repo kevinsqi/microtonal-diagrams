@@ -55,7 +55,7 @@ function TuningDiagram(props: {
           saveAs(blob, "diagram.svg");
         }}
       >
-        Download
+        Download .svg
       </button>
     </div>
   );
@@ -66,8 +66,10 @@ class App extends Component {
     return (
       <div className="container">
         <h1>Microtonal Diagrams</h1>
-        <TuningDiagram count={12} color="blue" radius={5} separation={10} />
-        <TuningDiagram count={24} color="blue" radius={5} separation={10} />
+        <div style={{ background: "#555" }}>
+          <TuningDiagram count={12} color="white" radius={4} separation={20} />
+          <TuningDiagram count={24} color="white" radius={5} separation={10} />
+        </div>
       </div>
     );
   }
