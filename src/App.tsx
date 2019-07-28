@@ -215,6 +215,10 @@ export default function App() {
       <div className="mt-5">
         <DiagramContainer diagramConfig={diagramConfig} />
       </div>
+      <div className="text-secondary text-center mt-5">
+        Built by <a href="https://www.kevinqi.com">@kevinsqi</a>. View source on{" "}
+        <a href="https://github.com/kevinsqi/microtonal-diagrams">Github</a>.
+      </div>
     </div>
   );
 }
