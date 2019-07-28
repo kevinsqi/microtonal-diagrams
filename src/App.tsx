@@ -58,7 +58,7 @@ function ConfigForm({
     <form>
       <div className="row">
         <div className="col-12 col-md-3">
-          <label>Count</label>
+          <label>Circle count</label>
           <input
             className="form-control"
             type="number"
@@ -72,25 +72,42 @@ function ConfigForm({
               });
             }}
           />
+          <div className="mt-3">
+            <label>Circle radius</label>
+            <input
+              className="form-control"
+              type="number"
+              value={diagramConfig.radius}
+              min={1}
+              max={1000}
+              onChange={event => {
+                setDiagramConfig({
+                  ...diagramConfig,
+                  radius: parseInt(event.target.value)
+                });
+              }}
+            />
+          </div>
         </div>
         <div className="col-12 col-md-3">
-          <label>Radius</label>
+          <label>Text</label>
           <input
             className="form-control"
-            type="number"
-            value={diagramConfig.radius}
+            type="text"
+            value={diagramConfig.text.join(" ")}
             min={1}
             max={1000}
             onChange={event => {
               setDiagramConfig({
                 ...diagramConfig,
-                radius: parseInt(event.target.value)
+                text: event.target.value.split(" ")
               });
             }}
           />
+          <small className="text-secondary">Separate with spaces</small>
         </div>
         <div className="col-12 col-md-3">
-          <label>Separation</label>
+          <label>Line length</label>
           <input
             className="form-control"
             type="number"
@@ -122,11 +139,12 @@ function ConfigForm({
 }
 
 export default function App() {
-  const [diagramConfig, setDiagramConfig] = React.useState({
+  const [diagramConfig, setDiagramConfig] = React.useState<DiagramConfig>({
     count: 12,
     color: "white",
     radius: 5,
-    separation: 20
+    separation: 20,
+    text: []
   });
 
   return (

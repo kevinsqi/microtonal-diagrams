@@ -3,4 +3,5 @@ export type DiagramConfig = {
   color: string;
   radius: number;
   separation: number;
+  text: string[];
 };

@@ -8,7 +8,7 @@ const Diagram = React.forwardRef((
   // TODO: type better
   ref: any
 ) => {
-  const { radius, count, separation, color } = diagramConfig;
+  const { radius, count, separation, color, text } = diagramConfig;
   const diameter = radius * 2;
   const height = diameter;
   const width = count * (diameter + separation) - separation;
@@ -18,17 +18,6 @@ const Diagram = React.forwardRef((
       xmlns="http://www.w3.org/2000/svg"
       ref={ref}
     >
-      {range(count).map(idx => {
-        return (
-          <circle
-            cx={(diameter + separation) * idx + radius}
-            cy={radius}
-            r={radius}
-            style={{ fill: color }}
-            key={idx}
-          />
-        );
-      })}
       {range(count - 1).map(idx => {
         const x1 = (diameter + separation) * idx + radius;
         return (
@@ -43,6 +32,28 @@ const Diagram = React.forwardRef((
             }}
             key={idx}
           />
+        );
+      })}
+      {range(count).map(idx => {
+        const cx = (diameter + separation) * idx + radius;
+        const cy = radius;
+        return (
+          <React.Fragment key={idx}>
+            <circle cx={cx} cy={cy} r={radius} style={{ fill: color }} />
+            {text[idx] && (
+              <text
+                x={cx}
+                y={cy}
+                style={{
+                  fontSize: 5,
+                  dominantBaseline: "central",
+                  textAnchor: "middle"
+                }}
+              >
+                {text[idx]}
+              </text>
+            )}
+          </React.Fragment>
         );
       })}
     </svg>
