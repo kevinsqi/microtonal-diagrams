@@ -32,6 +32,7 @@ const ScaleDiagram = React.forwardRef((
             cy={radius}
             r={radius}
             style={{ fill: color }}
+            key={idx}
           />
         );
       })}
@@ -47,6 +48,7 @@ const ScaleDiagram = React.forwardRef((
               stroke: color,
               strokeWidth: 1
             }}
+            key={idx}
           />
         );
       })}
