@@ -8,13 +8,20 @@ import { saveSvgAsPng } from "save-svg-as-png";
 // TODO: specify width/height
 // TODO: rename project to be more general, not specific to microtones
 
+type DiagramConfig = {
+  count: number;
+  color: string;
+  radius: number;
+  separation: number;
+};
+
 class DiagramContainer extends React.Component<any> {
   svgRef = React.createRef();
 
   render() {
     return (
       <div>
-        <ScaleDiagram {...this.props.scaleConfig} ref={this.svgRef} />
+        <ScaleDiagram {...this.props.diagramConfig} ref={this.svgRef} />
         <div className="text-center mt-5">
           <button
             className="btn btn-lg btn-secondary"
@@ -45,8 +52,82 @@ class DiagramContainer extends React.Component<any> {
   }
 }
 
+function ConfigForm({
+  diagramConfig,
+  setDiagramConfig
+}: {
+  diagramConfig: DiagramConfig;
+  setDiagramConfig: (conf: DiagramConfig) => void;
+}) {
+  return (
+    <form>
+      <div className="row">
+        <div className="col-12 col-md-3">
+          <label>Count</label>
+          <input
+            className="form-control"
+            type="number"
+            value={diagramConfig.count}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setDiagramConfig({
+                ...diagramConfig,
+                count: parseInt(event.target.value)
+              });
+            }}
+          />
+        </div>
+        <div className="col-12 col-md-3">
+          <label>Radius</label>
+          <input
+            className="form-control"
+            type="number"
+            value={diagramConfig.radius}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setDiagramConfig({
+                ...diagramConfig,
+                radius: parseInt(event.target.value)
+              });
+            }}
+          />
+        </div>
+        <div className="col-12 col-md-3">
+          <label>Separation</label>
+          <input
+            className="form-control"
+            type="number"
+            value={diagramConfig.separation}
+            min={1}
+            max={1000}
+            onChange={event => {
+              setDiagramConfig({
+                ...diagramConfig,
+                separation: parseInt(event.target.value)
+              });
+            }}
+          />
+        </div>
+        <div className="col-12 col-md-3">
+          <label>Color</label>
+          <input
+            className="form-control"
+            type="text"
+            value={diagramConfig.color}
+            onChange={event => {
+              setDiagramConfig({ ...diagramConfig, color: event.target.value });
+            }}
+          />
+        </div>
+      </div>
+    </form>
+  );
+}
+
 export default function App() {
-  const [scaleConfig, setScaleConfig] = React.useState({
+  const [diagramConfig, setDiagramConfig] = React.useState({
     count: 12,
     color: "white",
     radius: 5,
@@ -57,72 +138,13 @@ export default function App() {
     <div className="container my-5">
       <h1 className="text-center">Microtone Scale Diagrams</h1>
       <div className="mt-5">
-        <form>
-          <div className="row">
-            <div className="col-12 col-md-3">
-              <label>Count</label>
-              <input
-                className="form-control"
-                type="number"
-                value={scaleConfig.count}
-                min={1}
-                max={1000}
-                onChange={event => {
-                  setScaleConfig({
-                    ...scaleConfig,
-                    count: parseInt(event.target.value)
-                  });
-                }}
-              />
-            </div>
-            <div className="col-12 col-md-3">
-              <label>Radius</label>
-              <input
-                className="form-control"
-                type="number"
-                value={scaleConfig.radius}
-                min={1}
-                max={1000}
-                onChange={event => {
-                  setScaleConfig({
-                    ...scaleConfig,
-                    radius: parseInt(event.target.value)
-                  });
-                }}
-              />
-            </div>
-            <div className="col-12 col-md-3">
-              <label>Separation</label>
-              <input
-                className="form-control"
-                type="number"
-                value={scaleConfig.separation}
-                min={1}
-                max={1000}
-                onChange={event => {
-                  setScaleConfig({
-                    ...scaleConfig,
-                    separation: parseInt(event.target.value)
-                  });
-                }}
-              />
-            </div>
-            <div className="col-12 col-md-3">
-              <label>Color</label>
-              <input
-                className="form-control"
-                type="text"
-                value={scaleConfig.color}
-                onChange={event => {
-                  setScaleConfig({ ...scaleConfig, color: event.target.value });
-                }}
-              />
-            </div>
-          </div>
-        </form>
+        <ConfigForm
+          diagramConfig={diagramConfig}
+          setDiagramConfig={setDiagramConfig}
+        />
       </div>
       <div className="mt-5">
-        <DiagramContainer scaleConfig={scaleConfig} />
+        <DiagramContainer diagramConfig={diagramConfig} />
       </div>
     </div>
   );
