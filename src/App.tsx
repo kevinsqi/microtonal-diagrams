@@ -4,6 +4,8 @@ import ScaleDiagram from "./ScaleDiagram";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng } from "save-svg-as-png";
 
+// TODO: be able to specify text for each dot (put input above them?)
+// TODO: specify width/height
 // TODO: rename project to be more general, not specific to microtones
 
 class DiagramContainer extends React.Component<any> {
@@ -13,34 +15,37 @@ class DiagramContainer extends React.Component<any> {
     return (
       <div>
         <ScaleDiagram {...this.props.scaleConfig} ref={this.svgRef} />
-        <button
-          className="btn btn-secondary"
-          onClick={() => {
-            const svgElement: HTMLElement = this.svgRef.current as HTMLElement;
-            const svgBlob = new Blob([svgElement.outerHTML], {
-              type: "image/svg+xml"
-            });
-            saveAs(svgBlob, "diagram.svg");
-          }}
-        >
-          Download .svg
-        </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => {
-            const svgElement: HTMLElement = this.svgRef.current as HTMLElement;
-            saveSvgAsPng(svgElement, "diagram.png", { scale: 4 });
-          }}
-        >
-          Download .png
-        </button>
+        <div className="text-center mt-5">
+          <button
+            className="btn btn-lg btn-secondary"
+            onClick={() => {
+              const svgElement: HTMLElement = this.svgRef
+                .current as HTMLElement;
+              const svgBlob = new Blob([svgElement.outerHTML], {
+                type: "image/svg+xml"
+              });
+              saveAs(svgBlob, "diagram.svg");
+            }}
+          >
+            Download .svg
+          </button>
+          <button
+            className="btn btn-lg btn-secondary ml-3"
+            onClick={() => {
+              const svgElement: HTMLElement = this.svgRef
+                .current as HTMLElement;
+              saveSvgAsPng(svgElement, "diagram.png", { scale: 4 });
+            }}
+          >
+            Download .png
+          </button>
+        </div>
       </div>
     );
   }
 }
 
 export default function App() {
-  // TODO: be able to specify text for each dot (put input above them?)
   const [scaleConfig, setScaleConfig] = React.useState({
     count: 12,
     color: "white",
