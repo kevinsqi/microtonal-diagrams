@@ -1,21 +1,14 @@
 import React from "react";
 import range from "lodash.range";
 
+import { DiagramConfig } from "./types";
+
 const Diagram = React.forwardRef((
-  {
-    count,
-    color,
-    radius,
-    separation
-  }: {
-    count: number;
-    color: string;
-    radius: number;
-    separation: number;
-  },
+  { diagramConfig }: { diagramConfig: DiagramConfig },
   // TODO: type better
   ref: any
 ) => {
+  const { radius, count, separation, color } = diagramConfig;
   const diameter = radius * 2;
   const height = diameter;
   const width = count * (diameter + separation) - separation;

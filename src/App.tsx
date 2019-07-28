@@ -1,19 +1,14 @@
 import React from "react";
-import "./App.css";
-import Diagram from "./Diagram";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng } from "save-svg-as-png";
+
+import "./App.css";
+import Diagram from "./Diagram";
+import { DiagramConfig } from "./types";
 
 // TODO: be able to specify text for each dot (put input above them?)
 // TODO: specify width/height
 // TODO: rename project to be more general, not specific to microtones
-
-type DiagramConfig = {
-  count: number;
-  color: string;
-  radius: number;
-  separation: number;
-};
 
 class DiagramContainer extends React.Component<any> {
   svgRef = React.createRef();
@@ -21,7 +16,7 @@ class DiagramContainer extends React.Component<any> {
   render() {
     return (
       <div>
-        <Diagram {...this.props.diagramConfig} ref={this.svgRef} />
+        <Diagram diagramConfig={this.props.diagramConfig} ref={this.svgRef} />
         <div className="text-center mt-5">
           <button
             className="btn btn-lg btn-secondary"
