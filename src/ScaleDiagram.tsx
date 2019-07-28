@@ -3,7 +3,7 @@ import range from "lodash.range";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng } from "save-svg-as-png";
 
-export default function TuningDiagram(props: {
+export default function ScaleDiagram(props: {
   count: number;
   color: string;
   radius: number;
