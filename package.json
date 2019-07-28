@@ -1,5 +1,6 @@
 {
   "name": "microtonal-diagrams",
+  "homepage": "https://www.kevinqi.com/microtonal-diagrams",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "@types/react-dom": "^16.0.11",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.0",
+    "gh-pages": "^2.0.1",
     "lodash.range": "^3.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -19,6 +21,8 @@
     "typescript": "^3.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
