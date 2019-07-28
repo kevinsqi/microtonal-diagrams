@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { saveAs } from "file-saver";
+import { saveSvgAsPng } from "save-svg-as-png";
 import range from "lodash.range";
 import "./App.css";
 
@@ -50,12 +51,23 @@ function TuningDiagram(props: {
       <button
         className="btn btn-secondary"
         onClick={() => {
-          const svg: HTMLElement = document.getElementById("diagram")!;
-          const blob = new Blob([svg.outerHTML], { type: "image/svg+xml" });
-          saveAs(blob, "diagram.svg");
+          const svgElement: HTMLElement = document.getElementById("diagram")!;
+          const svgBlob = new Blob([svgElement.outerHTML], {
+            type: "image/svg+xml"
+          });
+          saveAs(svgBlob, "diagram.svg");
         }}
       >
         Download .svg
+      </button>
+      <button
+        className="btn btn-secondary"
+        onClick={() => {
+          const svgElement: HTMLElement = document.getElementById("diagram")!;
+          saveSvgAsPng(svgElement, "diagram.png", { scale: 4 });
+        }}
+      >
+        Download .png
       </button>
     </div>
   );
